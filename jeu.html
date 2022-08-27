@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <h1>Jeu</h1>
+    <h2>deviner un nombre entr 0 et 20 en 5 coup!!!</h2>
+    <input type="button" value="commencer" onclick="commencer()">
+    <script>
+        function commencer() {
+            nbmyst = Math.floor(Math.random() * 21);
+            a = document.querySelector('input')
+            document.body.removeChild(a);
+            n = 1;
+            nvtent();
+        }
+
+        function nvtent() {
+            let div = document.createElement('div');
+            var nvlabel = document.createElement('label');
+            nvlabel.textContent = "tentative numero " + n;
+            var nvinputval = document.createElement('input');
+            nvinputval.setAttribute('type', 'text');
+            nvinputval.setAttribute('id', 'val' + n);
+            nvlabel.setAttribute('for', 'val' + n);
+            var nvbutton = document.createElement('input');
+            nvbutton.setAttribute('type', 'button');
+            nvbutton.setAttribute('value', 'verifier');
+
+            //var nvfrag = document.createDocumentFragment();
+            div.appendChild(nvlabel);
+            div.appendChild(nvinputval);
+            div.appendChild(nvbutton);
+            nvbutton.addEventListener('click', verif);
+            document.body.appendChild(div);
+            div.style.margin = "0px 0px 5px 0px";
+            nvinputval.style.margin = "0px 5px 0px 5px";
+        }
+
+        function verif() {
+            var idval = 'val' + n;
+            console.log(idval);
+            var x = document.getElementById(idval).value;
+            if (x == nbmyst)
+                alert('vous avez gagner du' + n + 'coup');
+            else {
+                n++;
+                if (n == 6)
+                    alert('vous avez perdu');
+                else {
+                    if (x < nbmyst)
+                        alert('le nombre mystere est plus grand');
+                    else
+                        alert('le nombre mystere est plus petit');
+                    nvtent();
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
